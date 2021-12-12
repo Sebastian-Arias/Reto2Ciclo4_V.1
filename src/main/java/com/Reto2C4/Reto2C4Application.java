@@ -1,6 +1,7 @@
 package com.Reto2C4;
 
 import com.Reto2C4.InterfaceCRUD.LaptopInterface;
+import com.Reto2C4.InterfaceCRUD.OrderInterface;
 import com.Reto2C4.InterfaceCRUD.UserInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
 @Component
-@SpringBootApplication
+@SpringBootApplication //Genere un entorno para spring pueda desplegar servicios web en tomcat
 public class Reto2C4Application implements CommandLineRunner{
 
     @Autowired
@@ -17,6 +18,9 @@ public class Reto2C4Application implements CommandLineRunner{
     
     @Autowired
     public LaptopInterface LaptopRepository;
+    
+    @Autowired
+    public OrderInterface OrderRepository;
     
 	public static void main(String[] args) {
 		SpringApplication.run(Reto2C4Application.class, args);
@@ -26,5 +30,6 @@ public class Reto2C4Application implements CommandLineRunner{
     public void run(String... args) throws Exception {
         UserRepository.deleteAll();
         LaptopRepository.deleteAll();
+        OrderRepository.deleteAll();
     }
 }

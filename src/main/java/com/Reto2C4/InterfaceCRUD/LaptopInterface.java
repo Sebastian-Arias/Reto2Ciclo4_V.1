@@ -12,5 +12,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @author Home
  */
 public interface LaptopInterface extends MongoRepository<Laptop, Integer>{
-    
+
 }

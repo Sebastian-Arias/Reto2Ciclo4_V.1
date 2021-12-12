@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Reto2C4.Repository;
 
 import com.Reto2C4.Entity.User;
@@ -49,5 +45,10 @@ public class UserRepository {
 
     public Optional<User> authenticateUser(String email, String password) {
         return UserCrudRepository.findByEmailAndPassword(email, password);
+    }
+    
+    //Reto3
+    public Optional<User> lastUserId(){
+        return UserCrudRepository.findTopByOrderByIdDesc();
     }
 }

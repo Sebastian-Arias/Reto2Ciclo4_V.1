@@ -3,6 +3,7 @@ package com.Reto2C4.WebController;
 import com.Reto2C4.Entity.User;
 import com.Reto2C4.Service.UserService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -41,6 +42,16 @@ public class UserController {
     }
     
     /**
+     * Anotacion para traer a una coleccion por su id
+     * @param primarykey
+     * @return 
+     */
+    @GetMapping("{id}")
+    public Optional <User> getUser(@PathVariable("id")int primarykey){
+        return UserWeb.getUser(primarykey);
+    }
+    
+    /**
      * Anotacion para Ingresar un nuevo usuarioo 
      * @param user
      * @return 
@@ -64,13 +75,13 @@ public class UserController {
     
     /**
      * Anotacion para eliminar por id numerico
-     * @param id
+     * @param primarykey
      * @return 
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("id") int id) {
-        return UserWeb.delete(id);
+    public boolean delete(@PathVariable("id") int primarykey) {
+        return UserWeb.delete(primarykey);
     }
     
     /**

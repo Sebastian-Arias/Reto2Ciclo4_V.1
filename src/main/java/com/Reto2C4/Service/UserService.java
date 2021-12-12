@@ -21,30 +21,40 @@ public class UserService {
     @Autowired 
     private UserRepository UserService;
     
-    public List<User> getAll() {
+    public List<User> getAll() {                
         return UserService.getAll();
     }
 
-    public Optional<User> getUser(int id) {
+    public Optional<User> getUser(int id) {       
         return UserService.getUser(id);
     }
     
     public User create(User user) {
-        if (user.getId() == null) {
-            return user;
-        } else {
-            Optional<User> e = UserService.getUser(user.getId());
-            if (e.isEmpty()) {
-                if (emailExists(user.getEmail()) == false) {
-                    return UserService.create(user);
-                } else {
-                    return user;
-                }
-            } else {
-                return user;
-            }
+        
+        //Obtiene el maximo id existente en la coleccion
+        Optional<User> userIdMaximo = UserService.lastUserId();
+        
+        //Si no recibe un id lo valida como el maximo
+        if(user.getId()== null){
+            //valida el maximo id generado si no hay es 1
+            if(userIdMaximo.isEmpty()){
+                user.setId(1);
+            //si tiene informacion se le suma 1 de la ultima insercion
+            }else
+                user.setId(userIdMaximo.get().getId()+1);
         }
-    }
+        
+        Optional<User> e = UserService.getUser(user.getId());
+        if (e.isEmpty()) {
+            if (emailExists(user.getEmail()) == false) {
+                return UserService.create(user);   //crea el usuario
+            } else {
+                return user; //retorna el usuario
+            }
+        } else {
+            return user;
+        }
+    }  //Cambio si el email existe es verdadero si no existe es falso
     
     public boolean emailExists(String email) {
         return UserService.emailExists(email);

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Reto2C4.Service;
 
 import com.Reto2C4.Entity.Laptop;
@@ -9,6 +5,7 @@ import com.Reto2C4.Repository.LaptopRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,6 +17,10 @@ public class LaptopService {
     
     @Autowired 
     private LaptopRepository LaptopService;
+    
+    //Reto3
+    @Autowired
+    private MongoTemplate mongotemplate;
     
     public List<Laptop> getAll() {
         return LaptopService.getAll();
