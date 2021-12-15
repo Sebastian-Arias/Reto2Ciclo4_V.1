@@ -66,5 +66,24 @@ public class OrderController {
     public List<Order> findByZone(@PathVariable("zona")String zona){
         return orderController.findByZone(zona);
     }
-      
+    
+    //Reto4
+    //Ordenes de un asesor por id 
+    @GetMapping("/salesman/{id}")
+    public List<Order> ordersSalesManByID(@PathVariable("id") Integer id) {
+        return orderController.ordersSalesManByID(id);
+    }
+    
+    //Ordenes de un asesor por id y estado
+    @GetMapping("/state/{state}/{id}")
+    public List<Order> ordersSalesManByState(@PathVariable("state") String state, @PathVariable("id") Integer id) {
+        return orderController.ordersSalesManByState(state, id);
+    }
+    
+    //Ordenes de un asesor por fecha o el id 
+    @GetMapping("/date/{date}/{id}")
+    public List<Order> ordersSalesManByDate(@PathVariable("date") String dateStr, @PathVariable("id") Integer id) {
+        return orderController.ordersSalesManByDate(dateStr, id);
+    }
+    
 }

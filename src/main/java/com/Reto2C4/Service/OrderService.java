@@ -78,6 +78,21 @@ public class OrderService {
     
     public List<Order> findByZone(String zone) {
         return OrderService.findByzone(zone);
-    }                    
-        
+    }
+    
+    //Reto4
+    //Optener las ordenes por id de un asesor
+    public List<Order> ordersSalesManByID(Integer id){
+    return OrderService.ordersSalesManByID(id);
+    }
+    
+    //Traer las ordenes dependiendo del estado y del id
+    public List<Order> ordersSalesManByState(String state, Integer id){
+        return OrderService.ordersSalesManByState(state, id);
+    }
+    
+    //Traer las ordenes por fecha y el id
+    public List<Order> ordersSalesManByDate(String dateStr, Integer id) {
+        return OrderService.ordersSalesManByDate(dateStr, id);
+    }
 }

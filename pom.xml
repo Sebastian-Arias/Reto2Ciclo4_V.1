@@ -11,7 +11,7 @@
 	<groupId>com.Backend</groupId>
 	<artifactId>Reto2C4</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Reto2C4</name>
+	<name>Reto4C4</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
