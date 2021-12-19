@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.Reto2C4.Service;
 
 import com.Reto2C4.Entity.User;
@@ -12,54 +8,75 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- *
- * @author Home
+ * @author Sebastian Arias
+ * Anotacion de la clase service
  */
 @Service 
 public class UserService {
     
+    /**
+     * Anotacion con el UserRepository
+     */
     @Autowired 
-    private UserRepository UserService;
+    private UserRepository UserService; // Unused
     
+    /**
+     * Anotacion Para traer los usuarios
+     * @return 
+     */
     public List<User> getAll() {                
         return UserService.getAll();
     }
-
-    public Optional<User> getUser(int id) {       
-        return UserService.getUser(id);
+    
+    /**
+     * Anotacion para traer un usuario por su ID 
+     * @param primaryKey
+     * @return 
+     */
+    public Optional<User> getUser(int primaryKey) {       
+        return UserService.getUser(primaryKey);
     }
     
+    /**
+     * Anotacion para crear los usuarios dependiendo de la informacion del id u email si esten creado o no
+     * @param user
+     * @return 
+     */
     public User create(User user) {
-        
-        //Obtiene el maximo id existente en la coleccion
         Optional<User> userIdMaximo = UserService.lastUserId();
-        
-        //Si no recibe un id lo valida como el maximo
-        if(user.getId()== null){
-            //valida el maximo id generado si no hay es 1
-            if(userIdMaximo.isEmpty()){
+        if (user.getId() == null) {
+            if (userIdMaximo.isEmpty()) {
                 user.setId(1);
-            //si tiene informacion se le suma 1 de la ultima insercion
-            }else
-                user.setId(userIdMaximo.get().getId()+1);
-        }
-        
-        Optional<User> e = UserService.getUser(user.getId());
-        if (e.isEmpty()) {
-            if (emailExists(user.getEmail()) == false) {
-                return UserService.create(user);   //crea el usuario
             } else {
-                return user; //retorna el usuario
+                user.setId(userIdMaximo.get().getId() + 1);
+            }
+        }
+        Optional<User> evento = UserService.getUser(user.getId());
+        if (evento.isEmpty()) {
+            if (emailExists(user.getEmail()) == false) {
+                return UserService.create(user);
+            } else {
+                return user;
             }
         } else {
             return user;
         }
-    }  //Cambio si el email existe es verdadero si no existe es falso
+    }
     
+    /**
+     * Verificas si un email ya existe en la coleccion de mongo 
+     * @param email
+     * @return 
+     */
     public boolean emailExists(String email) {
         return UserService.emailExists(email);
     }
     
+    /**
+     * Metodo para actualizar
+     * @param user
+     * @return 
+     */
     public User update(User user) {
 
         if (user.getId() != null) {
@@ -100,14 +117,25 @@ public class UserService {
         }
     }
     
+    /**
+     * Metodo para eliminar por medio de un id 
+     * @param userId
+     * @return 
+     */
     public boolean delete(int userId) {
         Boolean aBoolean = getUser(userId).map(user -> {
             UserService.delete(user);
             return true;
-        }).orElse(false);
+        }).orElse(false);  // instead, just 'return doSomething();'
         return aBoolean;
     }
     
+    /**
+     * Metodo para autentificar un usuario 
+     * @param email
+     * @param password
+     * @return 
+     */
     public User authenticateUser(String email, String password) {
         Optional<User> usuario = UserService.authenticateUser(email, password);
 
@@ -116,5 +144,12 @@ public class UserService {
         } else {
             return usuario.get();
         }
+    }
+    
+    
+    
+    //RETO5 No hace parte de nuebas practicas para el reto4
+    public List<User> findByMonthBirthtDay(String birthday) {
+        return UserService.findByMonthBirthtDay(birthday);
     }
 }

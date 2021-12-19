@@ -2,6 +2,7 @@ package com.Reto2C4.Service;
 
 import com.Reto2C4.Entity.Laptop;
 import com.Reto2C4.Repository.LaptopRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,27 @@ public class LaptopService {
             return true;
         }).orElse(false);
         return aBoolean;
+    }
+    
+    //METODOS RETO5 MIRAR LAS MODIFICACIONES
+        public List<Laptop> findByPrice(double price) {
+        return LaptopService.findByPrice(price);
+    }
+    
+    private boolean checkStrings(String string1, String string2) {
+        return string1.contains(string2);  //VAMOS A MIRAR
+    }
+    
+    public List<Laptop> findByDescription(String description2) {
+        List<Laptop> product = LaptopService.getAll();
+        ArrayList<Laptop> product2 = new ArrayList();
+        product.forEach(LaptopProduc -> {  //VAMOS A MIRAR
+            String descripcion1 = LaptopProduc.getDescription();
+            if (checkStrings(descripcion1, description2)) {
+                product2.add(LaptopProduc);
+            }
+        });
+        return (List<Laptop>) product2;
     }
     
 }

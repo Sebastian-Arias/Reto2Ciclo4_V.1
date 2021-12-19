@@ -61,4 +61,14 @@ public class LaptopController {
         return LaptopWeb.delete(id);
     }
     
+    //Reto5
+    @GetMapping("/price/{price}")
+    public List<Laptop> findByPrice(@PathVariable("price") double price) {
+        return LaptopWeb.findByPrice(price);
+    }
+    
+    @GetMapping("/description/{description}")
+    public List<Laptop> findByDescription(@PathVariable("description") String description) {
+        return LaptopWeb.findByDescription(description);
+    }
 }

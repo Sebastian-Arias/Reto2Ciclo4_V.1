@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.Reto2C4.InterfaceCRUD;
 
 import com.Reto2C4.Entity.User;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -15,7 +12,10 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface UserInterface extends MongoRepository<User, Integer>{
     Optional<User> findByEmail(String email);
     Optional<User> findByEmailAndPassword(String email,String password);
-    //Reto 3 
-    //Para buscar el id mayor o descendente 
+    
+    //Reto 3 Para buscar el id mayor o descendente 
     Optional<User> findTopByOrderByIdDesc();
+    
+    //Reto5 Buscar por mes de nacimiento
+    public List <User> findByMonthBirthtDay (String birthday);
 }

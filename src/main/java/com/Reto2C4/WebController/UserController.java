@@ -104,4 +104,9 @@ public class UserController {
     public boolean emailExists(@PathVariable("email") String email) {
         return UserWeb.emailExists(email);
     }
+    
+    @GetMapping("/birthday/{birthday}")
+    public List<User> findByMonthBirthtDay(@PathVariable("birthday") String birthday) {
+        return UserWeb.findByMonthBirthtDay(birthday);
+    }
 }
